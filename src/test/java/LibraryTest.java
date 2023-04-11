@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.assertEquals;
 
 public class LibraryTest {
@@ -15,9 +17,9 @@ public class LibraryTest {
     public void setup(){
         library = new Library();
         book = new Book("The Shining", "Stephen King", "Horror");
-        book2 = new Book("The Institute", "Stephen King", "Horror");
-        book3 = new Book("11/22/63", "Stephen King", "Science Fiction");
         book4 = new Book("Under the Skin", "Michael Faber", "Science Fiction");
+        book2 = new Book("The Institute", "Stephen King", "Horror");
+        book3 = new Book("11/22/63", "Stephen King", "Romance");
         book5 = new Book("The Bone Clocks", "David Mitchell", "Science Fiction");
         library.addBookToInventory(book);
         library.addBookToInventory(book2);
@@ -45,5 +47,14 @@ public class LibraryTest {
     @Test
     public void canSearchForTitleFalse(){
         assertEquals(false, library.searchInventory("The Stand"));
+    }
+
+    @Test
+    public void hashMapOfInventory(){
+        HashMap<String, Integer> answer = new HashMap<>();
+        answer.put("Horror", 2);
+        answer.put("Romance", 1);
+        answer.put("Science Fiction", 2);
+        assertEquals(answer, library.getInventoryByGenre());
     }
 }
